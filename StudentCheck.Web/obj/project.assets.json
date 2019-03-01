@@ -11797,11 +11797,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Mod Nattasit\\Desktop\\Data\\Project\\StudentCheck\\StudentCheck.Web\\StudentCheck.Web.csproj",
+      "projectUniqueName": "C:\\Users\\Mod Nattasit\\Desktop\\Data\\Project\\Website\\StudentCheck\\StudentCheck.Web\\StudentCheck.Web.csproj",
       "projectName": "StudentCheck.Web",
-      "projectPath": "C:\\Users\\Mod Nattasit\\Desktop\\Data\\Project\\StudentCheck\\StudentCheck.Web\\StudentCheck.Web.csproj",
+      "projectPath": "C:\\Users\\Mod Nattasit\\Desktop\\Data\\Project\\Website\\StudentCheck\\StudentCheck.Web\\StudentCheck.Web.csproj",
       "packagesPath": "C:\\Users\\Mod Nattasit\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Mod Nattasit\\Desktop\\Data\\Project\\StudentCheck\\StudentCheck.Web\\obj\\",
+      "outputPath": "C:\\Users\\Mod Nattasit\\Desktop\\Data\\Project\\Website\\StudentCheck\\StudentCheck.Web\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
