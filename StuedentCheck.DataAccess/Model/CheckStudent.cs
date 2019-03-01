@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace StuedentCheck.DataAccess.Model
+namespace StudentCheck.DataAccess.Model
 {
     public partial class CheckStudent
     {

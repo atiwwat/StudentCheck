@@ -7,9 +7,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{950B1DE8-7D6
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{D771B844-D904-4197-836B-FC7F8B2CB316}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentCheck.Web", "StudentCheck.Web\StudentCheck.Web.csproj", "{0E3A0AA2-3FA9-4CF4-956C-BE2EA2C3D6F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentCheck.Web", "StudentCheck.Web\StudentCheck.Web.csproj", "{0E3A0AA2-3FA9-4CF4-956C-BE2EA2C3D6F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StuedentCheck.DataAccess", "StuedentCheck.DataAccess\StuedentCheck.DataAccess.csproj", "{609E2529-792E-42E7-8612-9200B3CD14CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentCheck.DataAccess", "StudentCheck.DataAccess\StudentCheck.DataAccess.csproj", "{609E2529-792E-42E7-8612-9200B3CD14CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
