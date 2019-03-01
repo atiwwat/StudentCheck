@@ -1,0 +1,629 @@
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+using StuedentCheck.DataAccess.Model;
+
+namespace StuedentCheck.DataAccess
+{
+    public partial class StudentCheckDbContext : DbContext
+    {
+        public StudentCheckDbContext()
+        {
+        }
+
+        public StudentCheckDbContext(DbContextOptions<StudentCheckDbContext> options)
+            : base(options)
+        {
+        }
+
+        public virtual DbSet<Abstain> Abstain { get; set; }
+        public virtual DbSet<Admin> Admin { get; set; }
+        public virtual DbSet<CheckStudent> CheckStudent { get; set; }
+        public virtual DbSet<Checkname> Checkname { get; set; }
+        public virtual DbSet<Day> Day { get; set; }
+        public virtual DbSet<Faculty> Faculty { get; set; }
+        public virtual DbSet<Homework> Homework { get; set; }
+        public virtual DbSet<Login> Login { get; set; }
+        public virtual DbSet<Position> Position { get; set; }
+        public virtual DbSet<Professors> Professors { get; set; }
+        public virtual DbSet<Qrcode> Qrcode { get; set; }
+        public virtual DbSet<Register> Register { get; set; }
+        public virtual DbSet<Room> Room { get; set; }
+        public virtual DbSet<ScheduleClass> ScheduleClass { get; set; }
+        public virtual DbSet<StatusStudent> StatusStudent { get; set; }
+        public virtual DbSet<StudentList> StudentList { get; set; }
+        public virtual DbSet<StudentListSubjects> StudentListSubjects { get; set; }
+        public virtual DbSet<SubjectGroup> SubjectGroup { get; set; }
+        public virtual DbSet<SubjectList> SubjectList { get; set; }
+        public virtual DbSet<Subjects> Subjects { get; set; }
+        public virtual DbSet<Sysdiagrams> Sysdiagrams { get; set; }
+        public virtual DbSet<Year> Year { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Server=KITCHAI;Database=StudentCheck;User Id=sa;Password=123456789;Trusted_Connection=True;");
+            }
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.HasAnnotation("ProductVersion", "2.2.1-servicing-10028");
+
+            modelBuilder.Entity<Abstain>(entity =>
+            {
+                entity.Property(e => e.AbstainId)
+                    .HasColumnName("AbstainID")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.AbstainCause)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AbstainTime)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AbstainWeek)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Abstaincompensate)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Abstainroom)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ScheduleClassId).HasColumnName("Schedule_Class_Id");
+
+                entity.HasOne(d => d.ScheduleClass)
+                    .WithMany(p => p.Abstain)
+                    .HasForeignKey(d => d.ScheduleClassId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Abstain__Schedul");
+            });
+
+            modelBuilder.Entity<Admin>(entity =>
+            {
+                entity.Property(e => e.AdminId)
+                    .HasColumnName("AdminID")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.AdminFirstname)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AdminLastname)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AdminPassword)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AdminTel)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AdminUsername)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Adminemail)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<CheckStudent>(entity =>
+            {
+                entity.HasKey(e => e.Seq);
+
+                entity.Property(e => e.IdQr).HasColumnName("id_Qr");
+
+                entity.Property(e => e.StatusId).HasColumnName("Status_id");
+
+                entity.Property(e => e.StudentId)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Checkname>(entity =>
+            {
+                entity.Property(e => e.ChecknameId)
+                    .HasColumnName("ChecknameID")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Checknameinout)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Checknamestatus)
+                    .IsRequired()
+                    .HasColumnType("text");
+
+                entity.Property(e => e.ScheduleClassId).HasColumnName("Schedule_Class_Id");
+            });
+
+            modelBuilder.Entity<Day>(entity =>
+            {
+                entity.Property(e => e.DayId)
+                    .HasColumnName("Day_id")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.DayNameEng)
+                    .IsRequired()
+                    .HasColumnName("DayName_Eng")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DayNameThai)
+                    .IsRequired()
+                    .HasColumnName("DayName_Thai")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Faculty>(entity =>
+            {
+                entity.Property(e => e.FacultyId)
+                    .HasColumnName("FacultyID")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.FacultyBranch)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Facultyname)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Homework>(entity =>
+            {
+                entity.Property(e => e.HomeworkId)
+                    .HasColumnName("HomeworkID")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Homeworkdescription)
+                    .IsRequired()
+                    .HasColumnType("text");
+
+                entity.Property(e => e.Homeworkname)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Homeworkubmit)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Login>(entity =>
+            {
+                entity.Property(e => e.LoginId)
+                    .HasColumnName("LoginID")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ProfessorsId)
+                    .HasColumnName("ProfessorsID")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Status)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StudentId)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Username)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Position>(entity =>
+            {
+                entity.Property(e => e.PositionId)
+                    .HasColumnName("PositionID")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.PositionName)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Professors>(entity =>
+            {
+                entity.Property(e => e.ProfessorsId)
+                    .HasColumnName("ProfessorsID")
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.FacultyId).HasColumnName("FacultyID");
+
+                entity.Property(e => e.PositionId).HasColumnName("PositionID");
+
+                entity.Property(e => e.ProfessorsBranch)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ProfessorsEmail)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ProfessorsFacebookId)
+                    .HasColumnName("ProfessorsFacebookID")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ProfessorsFacultys)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ProfessorsFirstname)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ProfessorsLastname)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ProfessorsTel)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ProfessorslineId)
+                    .HasColumnName("ProfessorslineID")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Qrcode>(entity =>
+            {
+                entity.HasKey(e => e.IdQr)
+                    .HasName("PK__Qrcode");
+
+                entity.Property(e => e.IdQr).HasColumnName("id_Qr");
+
+                entity.Property(e => e.GenTime).HasColumnType("datetime");
+
+                entity.Property(e => e.QrcodeId)
+                    .IsRequired()
+                    .HasColumnName("QrcodeID")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ScheduleClassId).HasColumnName("Schedule_Class_Id");
+            });
+
+            modelBuilder.Entity<Register>(entity =>
+            {
+                entity.Property(e => e.RegisterId)
+                    .HasColumnName("RegisterID")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.ScheduleClassId).HasColumnName("Schedule_Class_Id");
+
+                entity.Property(e => e.StudentId)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Room>(entity =>
+            {
+                entity.Property(e => e.RoomId)
+                    .HasColumnName("RoomID")
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Roomname)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<ScheduleClass>(entity =>
+            {
+                entity.Property(e => e.ScheduleClassId)
+                    .HasColumnName("Schedule_Class_Id")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.DayId).HasColumnName("Day_id");
+
+                entity.Property(e => e.ProfessorsId)
+                    .HasColumnName("ProfessorsID")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RoomId)
+                    .HasColumnName("RoomID")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Semester)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SubjectGroup)
+                    .IsRequired()
+                    .HasMaxLength(10);
+
+                entity.Property(e => e.SubjectId)
+                    .IsRequired()
+                    .HasColumnName("SubjectID")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.YearStudy)
+                    .IsRequired()
+                    .HasMaxLength(10);
+            });
+
+            modelBuilder.Entity<StatusStudent>(entity =>
+            {
+                entity.HasKey(e => e.StatusId)
+                    .HasName("PK__StatusSt");
+
+                entity.Property(e => e.StatusId)
+                    .HasColumnName("Status_id")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Statusname)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<StudentList>(entity =>
+            {
+                entity.HasKey(e => e.StudentId)
+                    .HasName("PK__StudentL");
+
+                entity.Property(e => e.StudentId)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.FacultyId).HasColumnName("FacultyID");
+
+                entity.Property(e => e.PositionId).HasColumnName("PositionID");
+
+                entity.Property(e => e.ProfessorsId)
+                    .HasColumnName("ProfessorsID")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StudentAddress)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StudentAddressParent)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StudentBranch)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StudentEducationStatus)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StudentEmail)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StudentFacebook)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StudentFacebookParent)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StudentFacultys)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StudentFirstname)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StudentImg).IsUnicode(false);
+
+                entity.Property(e => e.StudentLastname)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StudentLineStudent)
+                    .IsRequired()
+                    .HasColumnName("StudentLine_Student")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StudentParentEmail)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StudentParentName)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StudentParentNumber)
+                    .IsRequired()
+                    .HasMaxLength(10);
+
+                entity.Property(e => e.StudentPrefix)
+                    .IsRequired()
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StudentTel)
+                    .IsRequired()
+                    .HasMaxLength(10);
+
+                entity.Property(e => e.StudentlineParent)
+                    .IsRequired()
+                    .HasColumnName("Studentline_Parent")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<StudentListSubjects>(entity =>
+            {
+                entity.HasKey(e => e.Seq);
+
+                entity.Property(e => e.StudentId)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SubjectId)
+                    .IsRequired()
+                    .HasColumnName("SubjectID")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<SubjectGroup>(entity =>
+            {
+                entity.Property(e => e.SubjectGroupId)
+                    .HasColumnName("SubjectGroup_id")
+                    .ValueGeneratedNever();
+            });
+
+            modelBuilder.Entity<SubjectList>(entity =>
+            {
+                entity.HasKey(e => e.Seq);
+
+                entity.Property(e => e.ProfessorsId)
+                    .HasColumnName("ProfessorsID")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SubjectId)
+                    .IsRequired()
+                    .HasColumnName("SubjectID")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Subjects>(entity =>
+            {
+                entity.HasKey(e => e.SubjectId)
+                    .HasName("PK__SubjectsID");
+
+                entity.Property(e => e.SubjectId)
+                    .HasColumnName("SubjectID")
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.FacultyId).HasColumnName("FacultyID");
+
+                entity.Property(e => e.SubjectNameEng)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SubjectNameThai)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Sysdiagrams>(entity =>
+            {
+                entity.HasKey(e => e.PrincipalId)
+                    .HasName("PK__sysdiagr");
+
+                entity.ToTable("sysdiagrams");
+
+                entity.Property(e => e.PrincipalId)
+                    .HasColumnName("principal_id")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Definition).HasColumnName("definition");
+
+                entity.Property(e => e.DiagramId).HasColumnName("diagram_id");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasColumnName("name")
+                    .HasMaxLength(128);
+
+                entity.Property(e => e.Version).HasColumnName("version");
+            });
+
+            modelBuilder.Entity<Year>(entity =>
+            {
+                entity.ToTable("year");
+
+                entity.Property(e => e.YearId)
+                    .HasColumnName("yearID")
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Education)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Sector)
+                    .HasColumnName("sector")
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Semester)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+            });
+        }
+    }
+}
