@@ -1,0 +1,46 @@
+﻿@model StudentCheck.DataAccess.ModelViews.ManageProfessorViewModel
+
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">ตารางข้อมูลอาจารย์</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <table id="professor-datatable" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>รหัสอาจารย์</th>
+                    <th>ตำแหน่ง</th>
+                    <th>ชื่อ</th>
+                    <th>นามสกุล</th>
+                    @*<th>คณะ</th>
+                    <th>สาขา</th>
+                    <th>อีเมล</th>
+                    <th>เบอร์โทร</th>
+                    <th>Facebook</th>
+                    <th>Line</th>*@
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model.ProfessorList)
+                {
+                    <tr>
+                        <td>@item.ProfessorsId</td>
+                        <td>@item.PositionId</td>
+                        <td>@item.ProfessorsFirstname</td>
+                        <td>@item.ProfessorsLastname</td>
+                        @*<td>@item.ProfessorsFacultys</td>
+                        <td>@item.ProfessorsBranch</td>
+                        <td>@item.ProfessorsEmail</td>
+                        <td>@item.ProfessorsTel</td>
+                        <td>@item.ProfessorsFacebookId</td>
+                        <td>@item.ProfessorslineId</td>*@
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <!-- /.box-body -->
+</div>

@@ -1,0 +1,38 @@
+﻿@model StudentCheck.DataAccess.ModelViews.ManageProfessorViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row" style="margin-top: 3%;">
+    <button type="button" class="btn btn-primary" id="btnCreateProfessor">เพิ่มข้อมูลอาจารย์</button>
+    <partial name="_CreatePrefessorModal" model="Model" />
+</div>
+<div class="row" style="margin-top: 3%;">
+    <partial name="_DatatableOfProfessor" model="Model" />
+</div>
+
+@section Scripts {
+
+    <script>
+
+        $(function () {
+            $("#professor-datatable").DataTable();
+        });
+
+        $("#btnCreateProfessor").click(function () {
+            $("#modal-create-professor").modal("show");
+        });
+
+        var OnSaveProfessor = function (res) {
+            if (res) {
+                alert("Save Success");
+            }
+            else {
+                alert("Error");
+            }
+        };
+
+    </script>
+
+}
