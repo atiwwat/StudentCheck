@@ -1,8 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using StudentCheck.DataAccess.Models;
 
-namespace StudentCheck.DataAccess.Models
+namespace StudentCheck.DataAccess
 {
     public partial class StudentCheckDbContext : DbContext
     {
