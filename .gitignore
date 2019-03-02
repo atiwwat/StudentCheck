@@ -10,7 +10,6 @@
 *.sln.docstates
 
 # Project-specific folders
-.vs
 obj
 
 # User-specific files (MonoDevelop/Xamarin Studio)
