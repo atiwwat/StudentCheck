@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using StudentCheck.DataAccess.Models;
 
 namespace StudentCheck.DataAccess
 {
@@ -44,13 +43,13 @@ namespace StudentCheck.DataAccess
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=KITCHAI;Database=StudentCheck;User Id=sa;Password=123456789;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=MOD-NATTASIT;Database=StudentCheck;User Id=sa;Password=mod_nattasit;Trusted_Connection=True;");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("ProductVersion", "2.2.1-servicing-10028");
+            modelBuilder.HasAnnotation("ProductVersion", "2.2.2-servicing-10034");
 
             modelBuilder.Entity<Abstain>(entity =>
             {
