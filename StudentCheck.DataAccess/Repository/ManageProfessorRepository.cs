@@ -38,5 +38,31 @@ namespace StudentCheck.DataAccess.Repository
 
             context.SaveChanges();
         }
+
+        public static void UpdateProfessor(StudentCheckDbContext context, CreateProfessorModel modelToUpdate)
+        {
+            var updateProfessor = context.Professors.Where(w => w.ProfessorsId == modelToUpdate.ProfessorsId).Single();
+            updateProfessor.ProfessorsId = modelToUpdate.ProfessorsId;
+            updateProfessor.PositionId = modelToUpdate.PositionId;
+            updateProfessor.ProfessorsFirstname = modelToUpdate.ProfessorsFirstname;
+            updateProfessor.ProfessorsLastname = modelToUpdate.ProfessorsLastname;
+            updateProfessor.ProfessorsFacultys = modelToUpdate.ProfessorsFacultys;
+            updateProfessor.ProfessorsBranch = modelToUpdate.ProfessorsBranch;
+            updateProfessor.ProfessorsTel = modelToUpdate.ProfessorsTel;
+            updateProfessor.ProfessorsEmail = modelToUpdate.ProfessorsEmail;
+            updateProfessor.ProfessorsFacebookId = modelToUpdate.ProfessorsFacebookId;
+            updateProfessor.ProfessorslineId = modelToUpdate.ProfessorslineId;
+
+            context.SaveChanges();
+        }
+
+        public static void DeleteProfessor(StudentCheckDbContext context, string ProfessorId)
+        {
+            var itemToRemove = context.Professors.Where(w => w.ProfessorsId == ProfessorId).Single();
+            context.Professors.Remove(itemToRemove);
+            
+            context.SaveChanges();
+        }
+
     }
 }

@@ -8,7 +8,7 @@
     <button type="button" class="btn btn-primary" id="btnCreateProfessor">เพิ่มข้อมูลอาจารย์</button>
     <partial name="_CreatePrefessorModal" model="Model" />
 </div>
-<div class="row" style="margin-top: 3%;">
+<div class="row" id="professor-datatable-parent" style="margin-top: 3%;">
     <partial name="_DatatableOfProfessor" model="Model" />
 </div>
 
@@ -18,20 +18,85 @@
 
         $(function () {
             $("#professor-datatable").DataTable();
+
+            SetPositionValueOfProfessorDatatable();
         });
 
         $("#btnCreateProfessor").click(function () {
             $("#modal-create-professor").modal("show");
         });
 
-        var OnSaveProfessor = function (res) {
+        function SetPositionValueOfProfessorDatatable() {
+            $("select[name='modelCreatProfessor.PositionId']").each(function () {
+                var positionId = $(this).closest("tr").find(".position-id-value").val();
+                $(this).val(positionId);
+            });
+        }
+
+        var OnSaveProfessorSuccess = function (res) {
             if (res) {
                 alert("Save Success");
+
+                $.ajax({
+                    url: "ManageProfessor/UpdateProfessorTable",
+                    success: function (res) {
+                        $("#professor-datatable").html(res);
+
+                        SetPositionValueOfProfessorDatatable();
+                    },
+                    error: function () { }
+                });
             }
             else {
                 alert("Error");
             }
         };
+
+        var OnUpdateProfessorSuccess = function (res) {
+            if (res) {
+                alert("Update Success");
+
+                $.ajax({
+                    url: "ManageProfessor/UpdateProfessorTable",
+                    success: function (res) {
+                        $("#professor-datatable").html(res);
+
+                        SetPositionValueOfProfessorDatatable();
+                    },
+                    error: function () { }
+                });
+            }
+            else {
+                alert("Error");
+            }
+        };
+
+        function DeleteProfessor(ProfessorId) {
+            $.ajax({
+                type: "POST",
+                url: "ManageProfessor/DeletePrefessor",
+                data: { ProfessorId: ProfessorId },
+                success: function (res) {
+                    if (res) {
+                        alert("Delete Success");
+
+                        $.ajax({
+                            url: "ManageProfessor/UpdateProfessorTable",
+                            success: function (res) {
+                                $("#professor-datatable").html(res);
+
+                                SetPositionValueOfProfessorDatatable();
+                            },
+                            error: function () { }
+                        });
+                    }
+                    else {
+                        alert("Error");
+                    }
+                },
+                error: function () { }
+            });
+        }
 
     </script>
 

@@ -26,6 +26,7 @@ namespace StudentCheck.Web.Controllers
         {
             ManageProfessorViewModel model = new ManageProfessorViewModel();
             model.modelCreatProfessor = new CreateProfessorModel();
+
             model.ProfessorList = ManageProfessorRepository.GetProfessorList(_context);
             model.modelCreatProfessor.PositionSelectList = ManageProfessorRepository.GetPositionList(_context).Select(s => new SelectListItem { Value = s.PositionId.ToString(), Text = s.PositionName } );
 
@@ -48,6 +49,53 @@ namespace StudentCheck.Web.Controllers
             }
 
             return Json(result);
+        }
+
+        [HttpPost]
+        public JsonResult UpdateProfessor(ManageProfessorViewModel modelToUpdate)
+        {
+            bool result;
+
+            try
+            {
+                ManageProfessorRepository.UpdateProfessor(_context, modelToUpdate.modelCreatProfessor);
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                result = false;
+            }
+
+            return Json(result);
+        }
+
+        [HttpPost]
+        public JsonResult DeletePrefessor(string ProfessorId)
+        {
+            bool result;
+
+            try
+            {
+                ManageProfessorRepository.DeleteProfessor(_context, ProfessorId);
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                result = false;
+            }
+
+            return Json(result);
+        }
+
+        public PartialViewResult UpdateProfessorTable()
+        {
+            ManageProfessorViewModel model = new ManageProfessorViewModel();
+            model.modelCreatProfessor = new CreateProfessorModel();
+
+            model.ProfessorList = ManageProfessorRepository.GetProfessorList(_context);
+            model.modelCreatProfessor.PositionSelectList = ManageProfessorRepository.GetPositionList(_context).Select(s => new SelectListItem { Value = s.PositionId.ToString(), Text = s.PositionName });
+
+            return PartialView("_DatatableOfProfessor", model);
         }
 
     }

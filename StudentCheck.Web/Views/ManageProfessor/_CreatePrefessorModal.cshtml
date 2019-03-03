@@ -3,7 +3,7 @@
 <div class="modal fade" id="modal-create-professor">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form asp-controller="ManageProfessor" asp-action="SaveProfessor" data-ajax="true" data-ajax-method="post" data-ajax-mode="replace" data-ajax-update="professor-datatable" data-ajax-success="OnSaveProfessor">
+            <form asp-controller="ManageProfessor" asp-action="SaveProfessor" data-ajax="true" data-ajax-method="post" data-ajax-mode="replace" data-ajax-update="professor-datatable" data-ajax-success="OnSaveProfessorSuccess">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -88,7 +88,5 @@
                 </div>
             </form>
         </div>
-        <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
 </div>
