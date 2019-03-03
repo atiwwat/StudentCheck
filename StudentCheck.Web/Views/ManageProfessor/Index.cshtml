@@ -4,11 +4,11 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="row" style="margin-top: 3%;">
+<div class="row" id="parent-create-professor" style="margin-top: 3%;">
     <button type="button" class="btn btn-primary" id="btnCreateProfessor">เพิ่มข้อมูลอาจารย์</button>
     <partial name="_CreatePrefessorModal" model="Model" />
 </div>
-<div class="row" id="professor-datatable-parent" style="margin-top: 3%;">
+<div class="row" id="parent-professor-datatable" style="margin-top: 3%;">
     <partial name="_DatatableOfProfessor" model="Model" />
 </div>
 
@@ -35,20 +35,23 @@
             });
         }
 
+        function UpdateProfessorTable() {
+            $.ajax({
+                url: "ManageProfessor/UpdateProfessorTable",
+                success: function (res) {
+                    $("#parent-professor-datatable").html(res);
+                    $("#professor-datatable").DataTable();
+
+                    SetPositionValueOfProfessorDatatable();
+                },
+                error: function () { }
+            });
+        }
+
         var OnSaveProfessorSuccess = function (res) {
             if (res) {
                 alert("Save Success");
-
-                $.ajax({
-                    url: "ManageProfessor/UpdateProfessorTable",
-                    success: function (res) {
-                        $("#professor-datatable-parent").html(res);
-                        $("#professor-datatable").DataTable();
-
-                        SetPositionValueOfProfessorDatatable();
-                    },
-                    error: function () { }
-                });
+                UpdateProfessorTable();
             }
             else {
                 alert("Error");
@@ -58,17 +61,7 @@
         var OnUpdateProfessorSuccess = function (res) {
             if (res) {
                 alert("Update Success");
-
-                $.ajax({
-                    url: "ManageProfessor/UpdateProfessorTable",
-                    success: function (res) {
-                        $("#professor-datatable-parent").html(res);
-                        $("#professor-datatable").DataTable();
-
-                        SetPositionValueOfProfessorDatatable();
-                    },
-                    error: function () { }
-                });
+                UpdateProfessorTable();
             }
             else {
                 alert("Error");
@@ -83,17 +76,7 @@
                 success: function (res) {
                     if (res) {
                         alert("Delete Success");
-
-                        $.ajax({
-                            url: "ManageProfessor/UpdateProfessorTable",
-                            success: function (res) {
-                                $("#professor-datatable-parent").html(res);
-                                $("#professor-datatable").DataTable();
-
-                                SetPositionValueOfProfessorDatatable();
-                            },
-                            error: function () { }
-                        });
+                        UpdateProfessorTable();
                     }
                     else {
                         alert("Error");
