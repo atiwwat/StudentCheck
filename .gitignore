@@ -11,7 +11,7 @@
 
 # Project-specific folders
 .vs
-Debug
+obj
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
