@@ -23,6 +23,8 @@
         });
 
         $("#btnCreateProfessor").click(function () {
+            $("#create-professor-form")[0].reset();
+            $(".field-validation-error span").hide();
             $("#modal-create-professor").modal("show");
         });
 
@@ -40,7 +42,8 @@
                 $.ajax({
                     url: "ManageProfessor/UpdateProfessorTable",
                     success: function (res) {
-                        $("#professor-datatable").html(res);
+                        $("#professor-datatable-parent").html(res);
+                        $("#professor-datatable").DataTable();
 
                         SetPositionValueOfProfessorDatatable();
                     },
@@ -59,7 +62,8 @@
                 $.ajax({
                     url: "ManageProfessor/UpdateProfessorTable",
                     success: function (res) {
-                        $("#professor-datatable").html(res);
+                        $("#professor-datatable-parent").html(res);
+                        $("#professor-datatable").DataTable();
 
                         SetPositionValueOfProfessorDatatable();
                     },
@@ -83,7 +87,8 @@
                         $.ajax({
                             url: "ManageProfessor/UpdateProfessorTable",
                             success: function (res) {
-                                $("#professor-datatable").html(res);
+                                $("#professor-datatable-parent").html(res);
+                                $("#professor-datatable").DataTable();
 
                                 SetPositionValueOfProfessorDatatable();
                             },

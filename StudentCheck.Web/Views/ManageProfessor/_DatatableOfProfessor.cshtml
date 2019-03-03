@@ -6,7 +6,7 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body">
-        <table class="table table-bordered table-striped" id="professor-datatable">
+        <table class="table table-bordered table-striped text-center" id="professor-datatable">
             <thead>
                 <tr>
                     <th>รหัสอาจารย์</th>
@@ -28,8 +28,8 @@
                         <td>@item.PositionId</td>
                         <td>@item.ProfessorsFirstname</td>
                         <td>@item.ProfessorsLastname</td>
-                        <td>
-                            <button type="button" class="btn fa-edit" data-toggle="modal" data-target="#modal-edit-@No"></button>
+                        <td class="text-center">
+                            <button type="button" class="btn" data-toggle="modal" data-target="#modal-edit-@No"><span class="fa fa-fw fa-edit"></span></button>
 
                             <div class="modal fade" id="modal-edit-@No">
                                 <div class="modal-dialog modal-lg">
@@ -47,12 +47,12 @@
                                                         <label>รหัสอาจารย์</label>
                                                     </div>
                                                     <div class="form-group col-sm-3">
-                                                        <input class="form-control" name="modelCreatProfessor.ProfessorsId" value="@item.ProfessorsId" disabled/>
+                                                        <input class="form-control" name="modelCreatProfessor.ProfessorsId" value="@item.ProfessorsId" readonly/>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="form-group col-sm-1">
-                                                        <label>ตำแหน่ง</label>
+                                                        <label >ตำแหน่ง</label>
                                                     </div>
                                                     <div class="form-group col-sm-3">
                                                         <input type="hidden" class="position-id-value" value="@item.PositionId" />
@@ -123,9 +123,9 @@
                                 </div>
                             </div>
                         </td>
-                        <td><button type="button" class="btn fa-remove" onclick="DeleteProfessor('@item.ProfessorsId')"></button></td>
+                        <td class="text-center"><button type="button" class="btn" onclick="DeleteProfessor('@item.ProfessorsId')"><span class="fa fa-fw fa-remove"></span></button></td>
                     </tr>
-                    No++;
+                   No++;
                 }
 
             </tbody>
