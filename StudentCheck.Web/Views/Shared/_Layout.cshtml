@@ -55,18 +55,35 @@
             <img src="~/image/SiamImage.jpg" style="max-width: 100%;" />
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-2 skin-blue">
+    <div class="row" style="background-color: #1e282c;">
+        <div class="col-sm-2">
             <ul class="sidebar-menu " data-widget="tree" style="background-color: #1e282c;">
                 <li class="header">MAIN NAVIGATION</li>
                 <li class="active treeview menu-open">
                     <a asp-controller="ManageProfessor" asp-action="Index">
-                        จักการข้อมูลอาจารย์
+                        จัดการข้อมูลอาจารย์
                     </a>
+                </li>
+                <li class="treeview menu-open">
+                    <a asp-controller="ManageProfessor" asp-action="Index">
+                        จัดการข้อมูลนักศึกษา
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-calendar"></i> <span>จัดการวิชา</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu" style="display: none;">
+                        <li><a href="../index.html"><i class="fa fa-circle-o"></i>ลงทะเบียนเรียน</a></li>
+                        <li><a href="../index2.html"><i class="fa fa-circle-o"></i>ลงวิชาสอน</a></li>
+                    </ul>
                 </li>
             </ul>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-10" style="background-color: #ffffff;">
             @RenderBody()
         </div>
     </div>
@@ -88,7 +105,7 @@
         <script src="~/lib/AdminLTE/dist/js/adminlte.js"></script>
         <!-- DataTables -->
         <script src="~/lib/AdminLTE/bower_components/datatables.net/js/jquery.dataTables.js"></script>
-        <script src="~/lib/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.js"></script>\
+        <script src="~/lib/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.js"></script>
         <!-- Jquery Validation -->
         <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
         <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
@@ -104,7 +121,7 @@
         <script src="~/lib/AdminLTE/dist/js/adminlte.min.js"></script>
         <!-- DataTables -->
         <script src="~/lib/AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-        <script src="~/lib/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>\
+        <script src="~/lib/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
         <!-- Jquery Validation -->
         <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
         <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>

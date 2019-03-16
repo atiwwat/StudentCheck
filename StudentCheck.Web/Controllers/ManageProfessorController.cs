@@ -28,7 +28,7 @@ namespace StudentCheck.Web.Controllers
             model.modelCreatProfessor = new CreateProfessorModel();
 
             model.ProfessorList = ManageProfessorRepository.GetProfessorList(_context);
-            model.modelCreatProfessor.PositionSelectList = ManageProfessorRepository.GetPositionList(_context).Select(s => new SelectListItem { Value = s.PositionId.ToString(), Text = s.PositionName } );
+            model.modelCreatProfessor.PositionSelectList = ManageProfessorRepository.GetPositionList(_context).Select(s => new SelectListItem { Value = s.PositionId.ToString(), Text = s.PositionName });
 
             return View(model);
         }

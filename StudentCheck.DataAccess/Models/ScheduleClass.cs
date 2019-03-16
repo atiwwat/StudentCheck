@@ -14,5 +14,7 @@ namespace StudentCheck.DataAccess.Models
         public string Semester { get; set; }
         public string RoomId { get; set; }
         public TimeSpan? StudyHour { get; set; }
+        public TimeSpan? StartStudy { get; set; }
+        public TimeSpan? EndStudy { get; set; }
     }
 }

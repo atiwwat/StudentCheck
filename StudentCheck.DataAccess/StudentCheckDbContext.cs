@@ -18,6 +18,7 @@ namespace StudentCheck.DataAccess
 
         public virtual DbSet<Abstain> Abstain { get; set; }
         public virtual DbSet<Admin> Admin { get; set; }
+        public virtual DbSet<Branch> Branch { get; set; }
         public virtual DbSet<CheckStudent> CheckStudent { get; set; }
         public virtual DbSet<Checkname> Checkname { get; set; }
         public virtual DbSet<Day> Day { get; set; }
@@ -123,6 +124,18 @@ namespace StudentCheck.DataAccess
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<Branch>(entity =>
+            {
+                entity.Property(e => e.BranchId).HasColumnName("BranchID");
+
+                entity.Property(e => e.BranchName)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FacultyId).HasColumnName("FacultyID");
+            });
+
             modelBuilder.Entity<CheckStudent>(entity =>
             {
                 entity.HasKey(e => e.Seq);
@@ -175,14 +188,7 @@ namespace StudentCheck.DataAccess
 
             modelBuilder.Entity<Faculty>(entity =>
             {
-                entity.Property(e => e.FacultyId)
-                    .HasColumnName("FacultyID")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.FacultyBranch)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                entity.Property(e => e.FacultyId).HasColumnName("FacultyID");
 
                 entity.Property(e => e.Facultyname)
                     .IsRequired()
@@ -407,28 +413,14 @@ namespace StudentCheck.DataAccess
                     .IsUnicode(false)
                     .ValueGeneratedNever();
 
+                entity.Property(e => e.BranchId).HasColumnName("BranchID");
+
                 entity.Property(e => e.FacultyId).HasColumnName("FacultyID");
 
                 entity.Property(e => e.PositionId).HasColumnName("PositionID");
 
-                entity.Property(e => e.ProfessorsId)
-                    .HasColumnName("ProfessorsID")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.StudentAddress)
                     .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.StudentAddressParent)
-                    .IsRequired()
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.StudentBranch)
-                    .IsRequired()
-                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.StudentEducationStatus)
@@ -444,15 +436,6 @@ namespace StudentCheck.DataAccess
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.StudentFacebookParent)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.StudentFacultys)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.StudentFirstname)
                     .IsRequired()
                     .HasMaxLength(50)
@@ -465,14 +448,17 @@ namespace StudentCheck.DataAccess
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.StudentLineStudent)
+                entity.Property(e => e.StudentLine)
                     .IsRequired()
-                    .HasColumnName("StudentLine_Student")
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.StudentParentEmail)
                     .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StudentParentLastName)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -495,8 +481,6 @@ namespace StudentCheck.DataAccess
                     .HasMaxLength(10);
 
                 entity.Property(e => e.StudentlineParent)
-                    .IsRequired()
-                    .HasColumnName("Studentline_Parent")
                     .HasMaxLength(50)
                     .IsUnicode(false);
             });
