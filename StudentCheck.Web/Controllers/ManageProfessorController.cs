@@ -9,7 +9,7 @@ using StudentCheck.DataAccess;
 using StudentCheck.DataAccess.Models;
 using StudentCheck.DataAccess.ModelViews;
 using StudentCheck.DataAccess.Repository;
-using StudentCheck.Web.Models;
+
 
 namespace StudentCheck.Web.Controllers
 {

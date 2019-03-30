@@ -1,96 +1,134 @@
-﻿@*@model StudentCheck.DataAccess.ModelViews.ManageStudentViewModel
+﻿@model StudentCheck.DataAccess.ModelViews.ManageStudentViewModel
 
-<div class="modal fade" id="modal-create-professor">
+<div class="modal fade" id="modal-create-student">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form id="create-professor-form" asp-controller="ManageProfessor" asp-action="SaveProfessor" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSaveProfessorSuccess">
+            <form id="create-student-form" asp-controller="ManageStudent" asp-action="SaveStudent" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSaveStudentSuccess">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title">Create Professor</h4>
+                    <h4 class="modal-title">Create Student</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
                         <div class="form-group col-sm-1">
-                            <label asp-for="modelCreatProfessor.ProfessorsId">รหัสอาจารย์</label>
+                            <label asp-for="modelCreatStudent.StudentId">รหัสนักศึกษา</label>
                         </div>
                         <div class="form-group col-sm-3">
-                            <input asp-for="modelCreatProfessor.ProfessorsId" class="form-control" />
-                            <span asp-validation-for="modelCreatProfessor.ProfessorsId" class="text-danger"></span>
+                            <input asp-for="modelCreatStudent.StudentId" class="form-control" />
+                            <span asp-validation-for="modelCreatStudent.StudentId" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-1">
-                            <label>ตำแหน่ง</label>
+                            <label></label>
                         </div>
                         <div class="form-group col-sm-3">
-                            <select class="form-control" asp-for="modelCreatProfessor.PositionId" asp-items="Model.modelCreatProfessor.PositionSelectList">
+                            <select class="form-control" asp-for="modelCreatStudent.StudentPrefix">
                                 <option value="">--- กรุณาเลือก ---</option>
+                                <option value="นาย">นาย</option>
+                                <option value="นาง">นาง</option>
+                                <option value="นางสาว">นางสาว</option>
+
                             </select>
-                            <span asp-validation-for="modelCreatProfessor.PositionId" class="text-danger"></span>
+                            @*<span asp-validation-for="modelCreatStudent.StudentPrefix" class="text-danger"></span>*@
                         </div>
                         <div class="form-group col-sm-1">
-                            <label asp-for="modelCreatProfessor.ProfessorsFirstname">ชื่อ</label>
+                            <label asp-for="modelCreatStudent.StudentFirstname">ชื่อ</label>
                         </div>
+
+
                         <div class="form-group col-sm-3">
-                            <input asp-for="modelCreatProfessor.ProfessorsFirstname" class="form-control" />
-                            <span asp-validation-for="modelCreatProfessor.ProfessorsFirstname" class="text-danger"></span>
+                            <input asp-for="modelCreatStudent.StudentFirstname" class="form-control" />
+                            <span asp-validation-for="modelCreatStudent.StudentFirstname" class="text-danger"></span>
                         </div>
                         <div class="form-group col-sm-1">
-                            <label asp-for="modelCreatProfessor.ProfessorsLastname">นามสกุล</label>
+                            <label asp-for="modelCreatStudent.StudentLastname">นามสกุล</label>
                         </div>
                         <div class="form-group col-sm-3">
-                            <input asp-for="modelCreatProfessor.ProfessorsLastname" class="form-control" />
-                            <span asp-validation-for="modelCreatProfessor.ProfessorsLastname" class="text-danger"></span>
+                            <input asp-for="modelCreatStudent.StudentLastname" class="form-control" />
+                            <span asp-validation-for="modelCreatStudent.StudentLastname" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-1">
-                            <label asp-for="modelCreatProfessor.ProfessorsFacultys">คณะ</label>
+                            <label asp-for="modelCreatStudent.StudentTel">เบอร์โทร</label>
                         </div>
                         <div class="form-group col-sm-3">
-                            <input asp-for="modelCreatProfessor.ProfessorsFacultys" class="form-control" />
-                            <span asp-validation-for="modelCreatProfessor.ProfessorsFacultys" class="text-danger"></span>
+                            <input asp-for="modelCreatStudent.StudentTel" class="form-control" />
+                            <span asp-validation-for="modelCreatStudent.StudentTel" class="text-danger"></span>
                         </div>
                         <div class="form-group col-sm-1">
-                            <label asp-for="modelCreatProfessor.ProfessorsBranch">สาขา</label>
+                            <label asp-for="modelCreatStudent.StudentEmail">อีเมล</label>
                         </div>
                         <div class="form-group col-sm-3">
-                            <input asp-for="modelCreatProfessor.ProfessorsBranch" class="form-control" />
-                            <span asp-validation-for="modelCreatProfessor.ProfessorsBranch" class="text-danger"></span>
+                            <input asp-for="modelCreatStudent.StudentEmail" class="form-control" />
+                            <span asp-validation-for="modelCreatStudent.StudentEmail" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-1">
-                            <label asp-for="modelCreatProfessor.ProfessorsTel">เบอร์โทร</label>
+                            <label asp-for="modelCreatStudent.StudentTel">FaceBook</label>
                         </div>
                         <div class="form-group col-sm-3">
-                            <input asp-for="modelCreatProfessor.ProfessorsTel" class="form-control" />
-                            <span asp-validation-for="modelCreatProfessor.ProfessorsTel" class="text-danger"></span>
+                            <input asp-for="modelCreatStudent.StudentFacebook" class="form-control" />
+                            <span asp-validation-for="modelCreatStudent.StudentFacebook" class="text-danger"></span>
                         </div>
                         <div class="form-group col-sm-1">
-                            <label asp-for="modelCreatProfessor.ProfessorsEmail">อีเมล</label>
+                            <label asp-for="modelCreatStudent.StudentLine">Line</label>
                         </div>
                         <div class="form-group col-sm-3">
-                            <input asp-for="modelCreatProfessor.ProfessorsEmail" class="form-control" />
-                            <span asp-validation-for="modelCreatProfessor.ProfessorsEmail" class="text-danger"></span>
+                            <input asp-for="modelCreatStudent.StudentLine" class="form-control" />
+                            <span asp-validation-for="modelCreatStudent.StudentLine" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    @*******@     <div class="row">
+                        <label>ข้อมูลผู้ปกครอง</label>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-1">
+                            <label asp-for="modelCreatStudent.StudentParentName">ชื่อ</label>
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <input asp-for="modelCreatStudent.StudentParentName" class="form-control" />
+                            <span asp-validation-for="modelCreatStudent.StudentParentName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-sm-1">
+                            <label asp-for="modelCreatStudent.StudentParentNumber">เบอร์โทร</label>
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <input asp-for="modelCreatStudent.StudentParentNumber" class="form-control" />
+                            <span asp-validation-for="modelCreatStudent.StudentParentNumber" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-1">
-                            <label asp-for="modelCreatProfessor.ProfessorsFacebookId">Facebook</label>
+                            <label asp-for="modelCreatStudent.StudentParentEmail">อีเมล</label>
                         </div>
                         <div class="form-group col-sm-3">
-                            <input asp-for="modelCreatProfessor.ProfessorsFacebookId" class="form-control" />
+                            <input asp-for="modelCreatStudent.StudentParentEmail" class="form-control" />
+                            <span asp-validation-for="modelCreatStudent.StudentParentEmail" class="text-danger"></span>
                         </div>
                         <div class="form-group col-sm-1">
-                            <label asp-for="modelCreatProfessor.ProfessorslineId">Line</label>
+                            <label asp-for="modelCreatStudent.StudentlineParent">Line</label>
                         </div>
                         <div class="form-group col-sm-3">
-                            <input asp-for="modelCreatProfessor.ProfessorslineId" class="form-control" />
+                            <input asp-for="modelCreatStudent.StudentlineParent" class="form-control" />
+                            <span asp-validation-for="modelCreatStudent.StudentlineParent" class="text-danger"></span>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="form-group col-sm-1">
+                            <label asp-for="modelCreatStudent.StudentAddress">ที่อยู่</label>
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <input asp-for="modelCreatStudent.StudentAddress" class="form-control" />
+                            <span asp-validation-for="modelCreatStudent.StudentAddress" class="text-danger"></span>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">ปิด</button>
@@ -99,4 +137,4 @@
             </form>
         </div>
     </div>
-</div>*@
+</div>

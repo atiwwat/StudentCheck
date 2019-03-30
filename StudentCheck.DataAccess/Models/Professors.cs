@@ -10,11 +10,10 @@ namespace StudentCheck.DataAccess.Models
         public string ProfessorsLastname { get; set; }
         public string ProfessorsEmail { get; set; }
         public string ProfessorsTel { get; set; }
-        public string ProfessorsFacultys { get; set; }
-        public string ProfessorsBranch { get; set; }
         public int PositionId { get; set; }
         public string ProfessorslineId { get; set; }
         public string ProfessorsFacebookId { get; set; }
-        public int? FacultyId { get; set; }
+        public int? FacultyIdP { get; set; }
+        public int? BranchIdP { get; set; }
     }
 }

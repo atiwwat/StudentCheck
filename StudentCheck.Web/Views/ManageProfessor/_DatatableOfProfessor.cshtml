@@ -75,13 +75,15 @@
                                                         <label>คณะ</label>
                                                     </div>
                                                     <div class="form-group col-sm-3">
-                                                        <input class="form-control" name="modelCreatProfessor.ProfessorsFacultys" value="@item.ProfessorsFacultys" />
+                                                        <input type="hidden" class="position-id-value" value="@item.FacultyIdP" />
+                                                        <select class="form-control" name="modelCreatProfessor.FacultyID_P" asp-items="Model.modelCreatProfessor.FacultyProfessorsSelectList"></select>
                                                     </div>
                                                     <div class="form-group col-sm-1">
                                                         <label>สาขา</label>
                                                     </div>
                                                     <div class="form-group col-sm-3">
-                                                        <input class="form-control" name="modelCreatProfessor.ProfessorsBranch" value="@item.ProfessorsBranch" />
+                                                        <input type="hidden" class="position-id-value" value="@item.BranchIdP" />
+                                                        <select class="form-control" name="modelCreatProfessor.BarnchID_P" asp-items="Model.modelCreatProfessor.BarnchProfessorsSelectList"></select>
                                                     </div>
                                                 </div>
                                                 <div class="row">

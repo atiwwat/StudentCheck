@@ -7,6 +7,5 @@ namespace StudentCheck.DataAccess.Models
     {
         public int BranchId { get; set; }
         public string BranchName { get; set; }
-        public int FacultyId { get; set; }
     }
 }

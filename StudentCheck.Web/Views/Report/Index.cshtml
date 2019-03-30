@@ -1,0 +1,34 @@
+﻿@model StudentCheck.DataAccess.ModelViews.ReportViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row" id="parent-report-datatable" style="margin-top: 3%;">
+    <partial name="_DatatableOfReport" model="Model" />
+</div>
+
+    
+
+@section Scripts {
+
+    <script>
+
+        $(function () {
+            $("#report-datatable").DataTable();
+        //SetPositionValueOfStudentDatatable();
+
+
+    //$(".form-inline").css("margin-bottom").replace(/[^-d.]/g, '');
+
+
+    });
+
+        $("#btnReport").click(function () {
+            $("#create-report-form")[0].reset();
+            $(".field-validation-error span").hide();
+            $("#modal-create-report").modal("show");
+        });
+
+    </script>
+}
