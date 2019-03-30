@@ -1,15 +1,15 @@
-﻿@*@model StudentCheck.DataAccess.ModelViews.ManageStudentViewModel
+﻿@model StudentCheck.DataAccess.ModelViews.ManageStudentViewModel
 
 @{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="row" id="parent-create-student" style="margin-top: 3%;">
-    <button type="button" class="btn btn-primary" id="btnCreateProfessor">เพิ่มข้อมูลอาจารย์</button>
-    <partial name="_CreatePrefessorModal" model="Model" />
+    <button type="button" class="btn btn-primary" id="btnCreateStudent">เพิ่มข้อมูลนักศึกษา</button>
+    <partial name="_CreateStudentModal" model="Model" />
 </div>
 <div class="row" id="parent-student-datatable" style="margin-top: 3%;">
-    <partial name="_DatatableOfProfessor" model="Model" />
+    <partial name="_DatatableOfStudent" model="Model" />
 </div>
 
 @section Scripts {
@@ -19,64 +19,70 @@
         $(function () {
             $("#student-datatable").DataTable();
 
-            SetPositionValueOfProfessorDatatable();
+            //SetPositionValueOfStudentDatatable();
+
+
+            //$(".form-inline").css("margin-bottom").replace(/[^-d.]/g, '');
+
+ 
         });
 
-        $("#btnCreateProfessor").click(function () {
-            $("#create-professor-form")[0].reset();
+        $("#btnCreateStudent").click(function () {
+            $("#create-student-form")[0].reset();
             $(".field-validation-error span").hide();
-            $("#modal-create-professor").modal("show");
+            $("#modal-create-student").modal("show");
         });
 
-        function SetPositionValueOfProfessorDatatable() {
-            $("select[name='modelCreatProfessor.PositionId']").each(function () {
-                var positionId = $(this).closest("tr").find(".position-id-value").val();
-                $(this).val(positionId);
-            });
-        }
+        //function SetPositionValueOfStudentDatatable() {
+        //    $("select[name='modelCreatStudent.PositionId']").each(function () {
+        //        var positionId = $(this).closest("tr").find(".position-id-value").val();
+        //        $(this).val(positionId);
+        //    });
+        //}
 
-        function UpdateProfessorTable() {
+        function UpdateStudentTable() {
             $.ajax({
-                url: "ManageProfessor/UpdateProfessorTable",
+                url: "ManageStudent/UpdateStudentTable",
                 success: function (res) {
-                    $("#parent-professor-datatable").html(res);
-                    $("#professor-datatable").DataTable();
+                    $("#parent-student-datatable").html(res);
+                    $("#student-datatable").DataTable();
 
-                    SetPositionValueOfProfessorDatatable();
+                    SetPositionValueOfStudentDatatable();
                 },
                 error: function () { }
             });
         }
 
-        var OnSaveProfessorSuccess = function (res) {
+        var OnSaveStudentSuccess = function (res) {
             if (res) {
                 alert("Save Success");
-                UpdateProfessorTable();
+                UpdateStudentTable();
             }
             else {
                 alert("Error");
             }
         };
 
-        var OnUpdateProfessorSuccess = function (res) {
+        var OnUpdateStudentSuccess = function (res) {
             if (res) {
                 alert("Update Success");
-                UpdateProfessorTable();
+                UpdateStudentTable();
+                $(".modal-edit").modal("hide");
             }
             else {
                 alert("Error");
             }
         };
 
-        function DeleteProfessor(ProfessorId) {
+        function DeleteStudent(StudentId) {
             $.ajax({
                 type: "POST",
-                url: "ManageProfessor/DeletePrefessor",
-                data: { ProfessorId: ProfessorId },
+                url: "ManageStudent/DeleteStudent",
+                data: { StudentId: StudentId },
                 success: function (res) {
                     if (res) {
                         alert("Delete Success");
-                        UpdateProfessorTable();
+                        UpdateStudentTable();
                     }
                     else {
                         alert("Error");
@@ -88,4 +94,4 @@
 
     </script>
 
-}*@
+}

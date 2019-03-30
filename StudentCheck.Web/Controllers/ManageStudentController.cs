@@ -9,7 +9,7 @@ using StudentCheck.DataAccess;
 using StudentCheck.DataAccess.Models;
 using StudentCheck.DataAccess.ModelViews;
 using StudentCheck.DataAccess.Repository;
-using StudentCheck.Web.Models;
+
 
 namespace StudentCheck.Web.Controllers
 {
@@ -51,7 +51,7 @@ namespace StudentCheck.Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult UpdateProfessor(ManageStudentViewModel modelToUpdate)
+        public JsonResult UpdateStudent(ManageStudentViewModel modelToUpdate)
         {
             bool result;
 
@@ -62,6 +62,7 @@ namespace StudentCheck.Web.Controllers
             }
             catch (Exception ex)
             {
+
                 result = false;
             }
 
@@ -69,24 +70,25 @@ namespace StudentCheck.Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult DeleteStudent(string ProfessorId)
+        public JsonResult DeleteStudent(string StudentId)
         {
             bool result;
 
             try
             {
-                ManageStudentRepository.DeleteStudent(_context, ProfessorId);
+                ManageStudentRepository.DeleteStudent(_context, StudentId);
                 result = true;
             }
             catch (Exception ex)
             {
+
                 result = false;
             }
 
             return Json(result);
         }
 
-        public PartialViewResult UpdateProfessorTable()
+        public PartialViewResult UpdateStudentTable()
         {
             ManageStudentViewModel model = new ManageStudentViewModel();
             model.modelCreatStudent = new CreateStudentModel();

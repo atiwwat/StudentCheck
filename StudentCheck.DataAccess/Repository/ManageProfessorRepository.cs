@@ -9,6 +9,14 @@ namespace StudentCheck.DataAccess.Repository
 {
     public static class ManageProfessorRepository
     {
+        public static List<FacultyProfessors> GetFacultyProfessorsList(StudentCheckDbContext context)
+        {
+            return context.FacultyProfessors.ToList();
+        }
+        public static List<BranchProfessors> GetBranchProfessorsList(StudentCheckDbContext context)
+        {
+            return context.BranchProfessors.ToList();
+        }
         public static List<Position> GetPositionList(StudentCheckDbContext context)
         {
             return context.Position.ToList();
@@ -28,8 +36,8 @@ namespace StudentCheck.DataAccess.Repository
                 ProfessorsLastname = modelToSave.ProfessorsLastname,
                 ProfessorsEmail = modelToSave.ProfessorsEmail,
                 ProfessorsTel = modelToSave.ProfessorsTel,
-                ProfessorsFacultys = modelToSave.ProfessorsFacultys,
-                ProfessorsBranch = modelToSave.ProfessorsBranch,
+                FacultyIdP = modelToSave.FacultyID_P,
+                BranchIdP = modelToSave.BarnchID_P,
                 PositionId = modelToSave.PositionId,
                 ProfessorslineId = modelToSave.ProfessorslineId,
                 ProfessorsFacebookId = modelToSave.ProfessorsFacebookId,
@@ -46,8 +54,8 @@ namespace StudentCheck.DataAccess.Repository
             updateProfessor.PositionId = modelToUpdate.PositionId;
             updateProfessor.ProfessorsFirstname = modelToUpdate.ProfessorsFirstname;
             updateProfessor.ProfessorsLastname = modelToUpdate.ProfessorsLastname;
-            updateProfessor.ProfessorsFacultys = modelToUpdate.ProfessorsFacultys;
-            updateProfessor.ProfessorsBranch = modelToUpdate.ProfessorsBranch;
+            updateProfessor.FacultyIdP = modelToUpdate.FacultyID_P;
+            updateProfessor.BranchIdP = modelToUpdate.BarnchID_P;
             updateProfessor.ProfessorsTel = modelToUpdate.ProfessorsTel;
             updateProfessor.ProfessorsEmail = modelToUpdate.ProfessorsEmail;
             updateProfessor.ProfessorsFacebookId = modelToUpdate.ProfessorsFacebookId;

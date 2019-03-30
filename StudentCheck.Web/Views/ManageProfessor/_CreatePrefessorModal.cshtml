@@ -47,18 +47,22 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-1">
-                            <label asp-for="modelCreatProfessor.ProfessorsFacultys">คณะ</label>
+                            <label asp-for="modelCreatProfessor.FacultyID_P">คณะ</label>
                         </div>
                         <div class="form-group col-sm-3">
-                            <input asp-for="modelCreatProfessor.ProfessorsFacultys" class="form-control" />
-                            <span asp-validation-for="modelCreatProfessor.ProfessorsFacultys" class="text-danger"></span>
+                            <select class="form-control" asp-for="modelCreatProfessor.FacultyID_P" asp-items="Model.modelCreatProfessor.FacultyProfessorsSelectList">
+                                <option value="">--- กรุณาเลือก ---</option>
+                            </select>
+                            <span asp-validation-for="modelCreatProfessor.FacultyID_P" class="text-danger"></span>
                         </div>
                         <div class="form-group col-sm-1">
-                            <label asp-for="modelCreatProfessor.ProfessorsBranch">สาขา</label>
+                            <label asp-for="modelCreatProfessor.BarnchID_P">สาขา</label>
                         </div>
                         <div class="form-group col-sm-3">
-                            <input asp-for="modelCreatProfessor.ProfessorsBranch" class="form-control" />
-                            <span asp-validation-for="modelCreatProfessor.ProfessorsBranch" class="text-danger"></span>
+                            <select class="form-control" asp-for="modelCreatProfessor.BarnchID_P" asp-items="Model.modelCreatProfessor.BarnchProfessorsSelectList">
+                                <option value="">--- กรุณาเลือก ---</option>
+                            </select>
+                            <span asp-validation-for="modelCreatProfessor.BarnchID_P" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">

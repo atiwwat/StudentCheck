@@ -11,6 +11,7 @@ namespace StudentCheck.DataAccess.ModelViews
     public class ManageProfessorViewModel
     {
         public CreateProfessorModel modelCreatProfessor { get; set; }
+
         public List<Professors> ProfessorList { get; set; }
     }
 
@@ -27,13 +28,13 @@ namespace StudentCheck.DataAccess.ModelViews
         [Required]
         public string ProfessorsTel { get; set; }
         [Required]
-        public string ProfessorsFacultys { get; set; }
-        [Required]
-        public string ProfessorsBranch { get; set; }
-        [Required]
         public int PositionId { get; set; }
         public string ProfessorslineId { get; set; }
         public string ProfessorsFacebookId { get; set; }
+        public int FacultyID_P { get; set; }
+        public int BarnchID_P { get; set; }
+        public IEnumerable<SelectListItem> FacultyProfessorsSelectList { get; set; }
+        public IEnumerable<SelectListItem> BarnchProfessorsSelectList { get; set; }
         public IEnumerable<SelectListItem> PositionSelectList { get; set; }
     }
 }

@@ -19,10 +19,11 @@ namespace StudentCheck.DataAccess
         public virtual DbSet<Abstain> Abstain { get; set; }
         public virtual DbSet<Admin> Admin { get; set; }
         public virtual DbSet<Branch> Branch { get; set; }
+        public virtual DbSet<BranchProfessors> BranchProfessors { get; set; }
         public virtual DbSet<CheckStudent> CheckStudent { get; set; }
-        public virtual DbSet<Checkname> Checkname { get; set; }
         public virtual DbSet<Day> Day { get; set; }
         public virtual DbSet<Faculty> Faculty { get; set; }
+        public virtual DbSet<FacultyProfessors> FacultyProfessors { get; set; }
         public virtual DbSet<Homework> Homework { get; set; }
         public virtual DbSet<Login> Login { get; set; }
         public virtual DbSet<Position> Position { get; set; }
@@ -34,7 +35,6 @@ namespace StudentCheck.DataAccess
         public virtual DbSet<StatusStudent> StatusStudent { get; set; }
         public virtual DbSet<StudentList> StudentList { get; set; }
         public virtual DbSet<StudentListSubjects> StudentListSubjects { get; set; }
-        public virtual DbSet<SubjectGroup> SubjectGroup { get; set; }
         public virtual DbSet<SubjectList> SubjectList { get; set; }
         public virtual DbSet<Subjects> Subjects { get; set; }
         public virtual DbSet<Sysdiagrams> Sysdiagrams { get; set; }
@@ -45,14 +45,12 @@ namespace StudentCheck.DataAccess
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=MOD-NATTASIT;Database=StudentCheck;User Id=sa;Password=mod_nattasit;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=KITCHAI;Database=StudentCheck;User Id=sa;Password=123456789;Trusted_Connection=True;");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("ProductVersion", "2.2.2-servicing-10034");
-
             modelBuilder.Entity<Abstain>(entity =>
             {
                 entity.Property(e => e.AbstainId)
@@ -132,8 +130,18 @@ namespace StudentCheck.DataAccess
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
+            });
 
-                entity.Property(e => e.FacultyId).HasColumnName("FacultyID");
+            modelBuilder.Entity<BranchProfessors>(entity =>
+            {
+                entity.HasKey(e => e.BranchIdP);
+
+                entity.Property(e => e.BranchIdP).HasColumnName("BranchId_P");
+
+                entity.Property(e => e.BrachNameP)
+                    .HasColumnName("BrachName_P")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<CheckStudent>(entity =>
@@ -149,24 +157,6 @@ namespace StudentCheck.DataAccess
                 entity.Property(e => e.StudentId)
                     .HasMaxLength(50)
                     .IsUnicode(false);
-            });
-
-            modelBuilder.Entity<Checkname>(entity =>
-            {
-                entity.Property(e => e.ChecknameId)
-                    .HasColumnName("ChecknameID")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.Checknameinout)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Checknamestatus)
-                    .IsRequired()
-                    .HasColumnType("text");
-
-                entity.Property(e => e.ScheduleClassId).HasColumnName("Schedule_Class_Id");
             });
 
             modelBuilder.Entity<Day>(entity =>
@@ -192,6 +182,19 @@ namespace StudentCheck.DataAccess
 
                 entity.Property(e => e.Facultyname)
                     .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<FacultyProfessors>(entity =>
+            {
+                entity.HasKey(e => e.FacultyIdP);
+
+                entity.Property(e => e.FacultyIdP).HasColumnName("FacultyID_P");
+
+                entity.Property(e => e.FacultynameP)
+                    .IsRequired()
+                    .HasColumnName("Facultyname_P")
                     .HasMaxLength(50)
                     .IsUnicode(false);
             });
@@ -264,14 +267,11 @@ namespace StudentCheck.DataAccess
                     .IsUnicode(false)
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.FacultyId).HasColumnName("FacultyID");
+                entity.Property(e => e.BranchIdP).HasColumnName("BranchID_P");
+
+                entity.Property(e => e.FacultyIdP).HasColumnName("FacultyID_P");
 
                 entity.Property(e => e.PositionId).HasColumnName("PositionID");
-
-                entity.Property(e => e.ProfessorsBranch)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.ProfessorsEmail)
                     .IsRequired()
@@ -280,11 +280,6 @@ namespace StudentCheck.DataAccess
 
                 entity.Property(e => e.ProfessorsFacebookId)
                     .HasColumnName("ProfessorsFacebookID")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ProfessorsFacultys)
-                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -498,13 +493,6 @@ namespace StudentCheck.DataAccess
                     .HasColumnName("SubjectID")
                     .HasMaxLength(50)
                     .IsUnicode(false);
-            });
-
-            modelBuilder.Entity<SubjectGroup>(entity =>
-            {
-                entity.Property(e => e.SubjectGroupId)
-                    .HasColumnName("SubjectGroup_id")
-                    .ValueGeneratedNever();
             });
 
             modelBuilder.Entity<SubjectList>(entity =>
