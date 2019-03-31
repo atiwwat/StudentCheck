@@ -30,6 +30,8 @@ namespace StudentCheck.Web.Controllers
             model.ProfessorList = ManageProfessorRepository.GetProfessorList(_context);
             model.modelCreatProfessor.PositionSelectList = ManageProfessorRepository.GetPositionList(_context).Select(s => new SelectListItem { Value = s.PositionId.ToString(), Text = s.PositionName });
 
+            model.modelCreatProfessor.FacultyProfessorsSelectList = ManageProfessorRepository.GetFacultyProfessorsList(_context).Select(f => new SelectListItem { Value = f.FacultyIdP.ToString(), Text = f.FacultynameP });
+            model.modelCreatProfessor.BarnchProfessorsSelectList = ManageProfessorRepository.GetBranchProfessorsList(_context).Select(b => new SelectListItem { Value = b.BranchIdP.ToString(), Text = b.BrachNameP });
             return View(model);
         }
 
