@@ -331,10 +331,16 @@ namespace StudentCheck.DataAccess
 
                 entity.Property(e => e.ScheduleClassId).HasColumnName("Schedule_Class_Id");
 
+                entity.Property(e => e.AttendClass).HasColumnName("AttendClass");
+
+                entity.Property(e => e.Absent).HasColumnName("Absent");
+
                 entity.Property(e => e.StudentId)
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+               
             });
 
             modelBuilder.Entity<Room>(entity =>
@@ -468,7 +474,7 @@ namespace StudentCheck.DataAccess
 
                 entity.Property(e => e.StudentPrefix)
                     .IsRequired()
-                    .HasMaxLength(10)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.StudentTel)

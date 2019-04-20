@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Rotativa.AspNetCore;
 using StudentCheck.DataAccess;
 
 namespace StudentCheck.Web
@@ -63,6 +64,8 @@ namespace StudentCheck.Web
                     name: "default",
                     template: "{controller=ManageProfessor}/{action=Index}/{id?}");
             });
+
+            RotativaConfiguration.Setup(env);
         }
     }
 }
