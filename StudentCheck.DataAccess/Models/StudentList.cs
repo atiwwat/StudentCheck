@@ -12,7 +12,6 @@ namespace StudentCheck.DataAccess.Models
         public string StudentTel { get; set; }
         public string StudentPrefix { get; set; }
         public string StudentLine { get; set; }
-        public string StudentImg { get; set; }
         public string StudentEducationStatus { get; set; }
         public string StudentParentName { get; set; }
         public string StudentParentLastName { get; set; }

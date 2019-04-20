@@ -5,8 +5,14 @@
 }
 
 <div class="row" id="parent-create-student" style="margin-top: 3%;">
-    <button type="button" class="btn btn-primary" id="btnCreateStudent">เพิ่มข้อมูลนักศึกษา</button>
-    <partial name="_CreateStudentModal" model="Model" />
+    <div class="col-2">
+        <button type="button" class="btn btn-primary" id="btnCreateStudent">เพิ่มข้อมูลนักศึกษา</button>
+        <partial name="_CreateStudentModal" model="Model" />
+    </div>
+    <div class="col-10">
+        <input type="file" class="form-control" id="studentDataFile" name="studentDataFile" />
+        <button type="button" class="btn btn-primary" id="btnUploadFile">อัพโหลด</button>
+    </div>
 </div>
 <div class="row" id="parent-student-datatable" style="margin-top: 3%;">
     <partial name="_DatatableOfStudent" model="Model" />
@@ -31,6 +37,21 @@
             $("#create-student-form")[0].reset();
             $(".field-validation-error span").hide();
             $("#modal-create-student").modal("show");
+        });
+
+        $("#btnUploadFile").click(function () {
+            var formData = new FormData();
+            formData.append('studentDataFile', $('#studentDataFile')[0].files[0]);
+            $.ajax({
+                url: '@Url.Action("UploadStudentDataFile", "ManageStudent")',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (res) {
+
+                }
+            });
         });
 
         //function SetPositionValueOfStudentDatatable() {

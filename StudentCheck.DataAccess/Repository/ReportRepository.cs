@@ -6,11 +6,11 @@ using System.Text;
 
 namespace StudentCheck.DataAccess.Repository
 {
-   public class ReportRepository
+    public class ReportRepository
     {
-        public static List<CreateReport>GetReportData(StudentCheckDbContext dbContext)
+        public static List<CreateReport> GetReportData(StudentCheckDbContext dbContext)
         {
-            var result = dbContext.ScheduleClass.Join(dbContext.Subjects, sc => sc.SubjectId, s => s.SubjectId, (sc, s) => new {sc, s })
+            var result = dbContext.ScheduleClass.Join(dbContext.Subjects, sc => sc.SubjectId, s => s.SubjectId, (sc, s) => new { sc, s })
                 .Join(dbContext.Day, sc1 => sc1.sc.DayId, d => d.DayId, (sc1, d) => new { sc1, d })
                 .Select(x => new CreateReport
                 {
@@ -24,7 +24,7 @@ namespace StudentCheck.DataAccess.Repository
             return result;
         }
 
-        public static List<PageReport>GetPageReportData(StudentCheckDbContext dbContext)
+        public static List<PageReport> GetPageReportData(StudentCheckDbContext dbContext)
         {
             var result = dbContext.CheckStudent.Join(dbContext.Qrcode, cs => cs.IdQr, qr => qr.IdQr, (cs, qr) => new { cs, qr })
                .Join(dbContext.StudentList, cs1 => cs1.cs.StudentId, sl => sl.StudentId, (cs1, sl) => new { cs1, sl })
@@ -37,26 +37,26 @@ namespace StudentCheck.DataAccess.Repository
                //.Join(dbContext.FacultyProfessors, c8 => c8.cs7.cs6.cs5.p.)
                .Select(z => new PageReport
                {
-               ScheduleClassId = z.cs7.cs6.cs5.cs4.cs3.sc.ScheduleClassId,
-               SubjectId = z.cs7.cs6.cs5.cs4.cs3.sc.SubjectId,
-               SubjectGroup = z.cs7.cs6.cs5.cs4.cs3.sc.SubjectGroup,
-               SubjectNameThai = z.cs7.cs6.cs5.cs4.s.SubjectNameThai,
-               SubjectCredit = z.cs7.cs6.cs5.cs4.s.SubjectCredit,
-               Day = z.d.DayNameThai,
-               ProfessorsId = z.cs7.cs6.cs5.cs4.cs3.sc.ProfessorsId,
-               ProfessorsFirstname = z.cs7.cs6.cs5.p.ProfessorsFirstname,
-               ProfessorsLastname = z.cs7.cs6.cs5.p.ProfessorsLastname,
-               ProfessorsTel = z.cs7.cs6.cs5.p.ProfessorsTel,
-               ProfessorsEmail = z.cs7.cs6.cs5.p.ProfessorsEmail,
-               StudentId = z.cs7.cs6.cs5.cs4.cs3.cs2.cs1.cs.StudentId,
-               StudentFirstname = z.cs7.cs6.cs5.cs4.cs3.cs2.sl.StudentFirstname,
-               StudentLastname = z.cs7.cs6.cs5.cs4.cs3.cs2.sl.StudentLastname,
-               StudentPrefix = z.cs7.cs6.cs5.cs4.cs3.cs2.sl.StudentPrefix,
-               FacultyID = z.cs7.cs6.cs5.cs4.cs3.cs2.sl.FacultyId.Value,
-               BranchID = z.cs7.cs6.cs5.cs4.cs3.cs2.sl.BranchId.Value,
-               NumberClass = z.cs7.cs6.cs5.cs4.cs3.cs2.cs1.qr.NumberClass,
-               Checkname = z.cs7.cs6.cs5.cs4.cs3.cs2.cs1.cs.IdQr,
-               Satatus = z.cs7.cs6.cs5.cs4.cs3.cs2.cs1.cs.StatusId
+                   ScheduleClassId = z.cs7.cs6.cs5.cs4.cs3.sc.ScheduleClassId,
+                   SubjectId = z.cs7.cs6.cs5.cs4.cs3.sc.SubjectId,
+                   SubjectGroup = z.cs7.cs6.cs5.cs4.cs3.sc.SubjectGroup,
+                   SubjectNameThai = z.cs7.cs6.cs5.cs4.s.SubjectNameThai,
+                   SubjectCredit = z.cs7.cs6.cs5.cs4.s.SubjectCredit,
+                   Day = z.d.DayNameThai,
+                   ProfessorsId = z.cs7.cs6.cs5.cs4.cs3.sc.ProfessorsId,
+                   ProfessorsFirstname = z.cs7.cs6.cs5.p.ProfessorsFirstname,
+                   ProfessorsLastname = z.cs7.cs6.cs5.p.ProfessorsLastname,
+                   ProfessorsTel = z.cs7.cs6.cs5.p.ProfessorsTel,
+                   ProfessorsEmail = z.cs7.cs6.cs5.p.ProfessorsEmail,
+                   StudentId = z.cs7.cs6.cs5.cs4.cs3.cs2.cs1.cs.StudentId,
+                   StudentFirstname = z.cs7.cs6.cs5.cs4.cs3.cs2.sl.StudentFirstname,
+                   StudentLastname = z.cs7.cs6.cs5.cs4.cs3.cs2.sl.StudentLastname,
+                   StudentPrefix = z.cs7.cs6.cs5.cs4.cs3.cs2.sl.StudentPrefix,
+                   FacultyID = z.cs7.cs6.cs5.cs4.cs3.cs2.sl.FacultyId.Value,
+                   BranchID = z.cs7.cs6.cs5.cs4.cs3.cs2.sl.BranchId.Value,
+                   NumberClass = z.cs7.cs6.cs5.cs4.cs3.cs2.cs1.qr.NumberClass,
+                   Checkname = z.cs7.cs6.cs5.cs4.cs3.cs2.cs1.cs.IdQr,
+                   Satatus = z.cs7.cs6.cs5.cs4.cs3.cs2.cs1.cs.StatusId
                }).ToList();
 
             return result;
@@ -65,11 +65,11 @@ namespace StudentCheck.DataAccess.Repository
         }
     }
 }
- //.Select(m => new { 
- //       ProdId = m.ppc.p.Id, // or m.ppc.pc.ProdId
- //       CatId = m.c.CatId
- //       // other assignments
- //   });
+//.Select(m => new { 
+//       ProdId = m.ppc.p.Id, // or m.ppc.pc.ProdId
+//       CatId = m.c.CatId
+//       // other assignments
+//   });
 
 //var startingDeck = Suits().SelectMany(suit => Ranks().Select(rank => new { Suit = suit, Rank = rank }));
 

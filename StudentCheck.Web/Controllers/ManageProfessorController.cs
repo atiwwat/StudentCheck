@@ -10,7 +10,6 @@ using StudentCheck.DataAccess.Models;
 using StudentCheck.DataAccess.ModelViews;
 using StudentCheck.DataAccess.Repository;
 
-
 namespace StudentCheck.Web.Controllers
 {
     public class ManageProfessorController : Controller

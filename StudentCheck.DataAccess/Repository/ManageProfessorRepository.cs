@@ -68,7 +68,7 @@ namespace StudentCheck.DataAccess.Repository
         {
             var itemToRemove = context.Professors.Where(w => w.ProfessorsId == ProfessorId).Single();
             context.Professors.Remove(itemToRemove);
-            
+
             context.SaveChanges();
         }
 

@@ -43,6 +43,12 @@ namespace StudentCheck.DataAccess.Repository
             context.SaveChanges();
         }
 
+        public static void SaveStudentList(StudentCheckDbContext context, List<StudentList> studentLists)
+        {
+            context.StudentList.AddRange(studentLists);
+            context.SaveChanges();
+        }
+
         public static void UpdateStudent(StudentCheckDbContext context, CreateStudentModel modelToUpdate)
         {
             var updateStudent = context.StudentList.Where(w => w.StudentId == modelToUpdate.StudentId).Single();
