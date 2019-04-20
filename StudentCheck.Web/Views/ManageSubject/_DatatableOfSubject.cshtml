@@ -1,0 +1,94 @@
+﻿@model StudentCheck.DataAccess.ModelViews.ManageSubjectViewModel
+
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">ตารางวิชา</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <table class="table table-bordered table-striped text-center" id="subject-datatable">
+            <thead>
+                <tr>
+                    <th>รหัสวิชา</th>
+                    <th>ชื่อวิชาภาษาไทย</th>
+                    <th>ชื่อวิชาภาษาอังกฤษ</th>
+                    <th>หน่วยกิต</th>
+                    <th>แก้ไข</th>
+                    <th>ลบ</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @{ int No = 0; }
+
+                @foreach (var item in Model.Subjects)
+                {
+                    <tr>
+                        <td>@item.SubjectId</td>
+                        <td>@item.SubjectNameThai</td>
+                        <td>@item.SubjectNameEng</td>
+                        <td>@item.SubjectCredit</td>
+                        <td class="text-center">
+                            <button type="button" class="btn" data-toggle="modal" data-target="#modal-edit-@No"><span class="fa fa-fw fa-edit"></span></button>
+
+                            <div class="modal fade modal-edit" id="modal-edit-@No">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <form asp-controller="ManageSubject" asp-action="UpdateSubject" data-ajax="true" data-ajax-method="post" data-ajax-mode="replace" data-ajax-update="subject-datatable" data-ajax-success="OnUpdateSubjectSuccess">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                <h4 class="modal-title">Update Subject</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="form-group col-sm-2">
+                                                        <label>รหัสวิชา</label>
+                                                    </div>
+                                                    <div class="form-group col-sm-3">
+                                                        <input class="form-control" name="modelCreateSubject.SubjectId" value="@item.SubjectId" readonly />
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-sm-2">
+                                                        <label>ชื่อวิชาภาษาไทย</label>
+                                                    </div>
+                                                    <div class="form-group col-sm-3">
+                                                        <input class="form-control" name="modelCreateSubject.SubjectNameThai" value="@item.SubjectNameThai"  />
+                                                    </div>
+                                                    <div class="form-group col-sm-2">
+                                                        <label>ชื่อวิชาภาษาอังกฤษ</label>
+                                                    </div>
+                                                    <div class="form-group col-sm-3">
+                                                        <input class="form-control" name="modelCreateSubject.SubjectNameEng" value="@item.SubjectNameEng"  />
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-sm-2">
+                                                        <label>หน่วยกิต</label>
+                                                    </div>
+                                                    <div class="form-group col-sm-3">
+                                                        <input class="form-control" name="modelCreateSubject.SubjectCredit" value="@item.SubjectCredit"  />
+                                                    </div>
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">ปิด</button>
+                                                    <button type="submit" class="btn btn-primary">อัพเดท</button>
+                                                </div>
+</form>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="text-center"><button type="button" class="btn" onclick="DeleteSubject('@item.SubjectId')"><span class="fa fa-fw fa-remove"></span></button></td>
+                    </tr>
+                    No++;
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <!-- /.box-body -->
+</div>
