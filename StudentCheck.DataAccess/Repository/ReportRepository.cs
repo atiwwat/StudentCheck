@@ -91,20 +91,41 @@ namespace StudentCheck.DataAccess.Repository
                 string cmdText = string.Empty;
                 cmdText += "SELECT Subjects.SubjectNameThai, Subjects.SubjectID, Subjects.SubjectCredit, ScheduleClass.Schedule_Class_Id, ScheduleClass.SubjectGroup, ScheduleClass.YearStudy, ScheduleClass.Semester, ";
                 cmdText += "Day.DayName_Thai, Professors.ProfessorsID, Professors.ProfessorsFirstname, Professors.ProfessorsLastname, Professors.ProfessorsEmail, Professors.ProfessorsTel, Position.PositionName, ";
-                cmdText += "FacultyProfessors.Facultyname_P, BranchProfessors.BrachName_P, Faculty.Facultyname, Branch.BranchName, StudentList.StudentId, StudentList.StudentFirstname, StudentList.StudentLastname, ";
+                cmdText += "FacultyProfessors.Facultyname_P, BranchProfessors.BrachName_P, Faculty.Facultyname, Branch.BranchName, StudentList.StudentId, StudentList.StudentFirstname, StudentList.StudentLastname, StudentList.StudentPrefix, ";
                 cmdText += "Register.AttendClass, Register.Absent FROM Faculty INNER JOIN StudentList ON Faculty.FacultyID = StudentList.FacultyID INNER JOIN Branch ON StudentList.BranchID = Branch.BranchID INNER JOIN ";
                 cmdText += "Register ON StudentList.StudentId = Register.StudentId RIGHT OUTER JOIN ScheduleClass INNER JOIN FacultyProfessors INNER JOIN Professors ON FacultyProfessors.FacultyID_P = Professors.FacultyID_P INNER JOIN ";
                 cmdText += "BranchProfessors ON Professors.BranchID_P = BranchProfessors.BranchId_P ON ScheduleClass.ProfessorsID = Professors.ProfessorsID INNER JOIN Position ON Professors.PositionID = Position.PositionID ON Register.Schedule_Class_Id = ScheduleClass.Schedule_Class_Id LEFT OUTER JOIN Day ON ScheduleClass.Day_id = Day.Day_id LEFT OUTER JOIN Subjects ON ScheduleClass.SubjectID = Subjects.SubjectID WHERE ScheduleClass.Schedule_Class_Id = '1112'";
 
                 SqlCommand cmd = new SqlCommand(cmdText, conn);
-                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandType = CommandType.Text;
                 conn.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
                     PageReport pageReport = new PageReport();
-                    pageReport.SubjectId = reader["TenMon"].ToString();
-                    pageReport.SubjectGroup = reader["LoaiMon"].ToString();
+                    pageReport.ScheduleClassId = reader["Schedule_Class_Id"].ToString();
+                    pageReport.SubjectId = reader["SubjectId"].ToString();
+                    pageReport.SubjectGroup = reader["SubjectGroup"].ToString();
+                    pageReport.SubjectNameThai = reader["SubjectNameThai"].ToString();
+                    pageReport.SubjectCredit = Convert.ToInt32(reader["SubjectCredit"].ToString());
+                    pageReport.Day = reader["DayName_Thai"].ToString();
+                    pageReport.ProfessorsId = reader["ProfessorsId"].ToString();
+                    pageReport.ProfessorsFirstname = reader["ProfessorsFirstname"].ToString();
+                    pageReport.ProfessorsLastname = reader["ProfessorsLastname"].ToString();
+                    pageReport.ProfessorsTel = reader["ProfessorsTel"].ToString();
+                    pageReport.ProfessorsEmail = reader["ProfessorsEmail"].ToString();
+                    pageReport.StudentId = reader["StudentId"].ToString();
+                    pageReport.StudentFirstname = reader["StudentFirstname"].ToString();
+                    pageReport.StudentLastname = reader["StudentLastname"].ToString();
+                    pageReport.StudentPrefix = reader["StudentPrefix"].ToString();
+                    pageReport.FacultyProfessors = reader["Facultyname_P"].ToString();
+                    pageReport.BranchProfessors = reader["BrachName_P"].ToString();
+                    pageReport.FacultyName = reader["FacultyName"].ToString();
+                    pageReport.BranchName = reader["BranchName"].ToString();
+                    pageReport.AttendClass = Convert.IsDBNull(reader["AttendClass"]) ? 0 : Convert.ToInt32(reader["AttendClass"]);
+                    pageReport.Absent = Convert.IsDBNull(reader["Absent"])  ? 0 : Convert.ToInt32(reader["Absent"]);
+                    pageReport.YearStudy = reader["YearStudy"].ToString();
+                    pageReport.Semester = reader["Semester"].ToString();
                     pageReportList.Add(pageReport);
                 }
 

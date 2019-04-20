@@ -22,7 +22,7 @@ namespace StudentCheck.DataAccess.ModelViews
 
     public class PageReport
     {
-        public int ScheduleClassId { get; set; }
+        public string ScheduleClassId { get; set; }
         public string SubjectId { get; set; }
         public string SubjectGroup { get; set; }
         public string SubjectNameThai { get; set; }
@@ -37,10 +37,14 @@ namespace StudentCheck.DataAccess.ModelViews
         public string StudentFirstname { get; set; }
         public string StudentLastname { get; set; }
         public string StudentPrefix { get; set; }
+        public string FacultyProfessors { get; set; }
+        public string BranchProfessors { get; set; }
         public string FacultyName { get; set; }
         public string BranchName { get; set; }
-        public int NumberClass { get; set; }
-        public int Checkname { get; set; }
+        public int AttendClass { get; set; }
+        public int Absent { get; set; }
         public int Satatus { get; set; }
+        public string YearStudy { get; set; }
+        public string Semester { get; set; }
     }
 }

@@ -1,0 +1,105 @@
+﻿@{
+    Layout = null;
+}
+
+@model IList<StudentCheck.DataAccess.ModelViews.PageReport>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Report</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+<body>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="row">
+                    <div col-12>
+                        <label>Schedule Class : @Model.First().ScheduleClassId</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-3">
+                        <label>รหัสวิชา : @Model.First().SubjectId</label>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label>ชื่อวิชา : @Model.First().SubjectNameThai</label>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label>หน่วยกิต : @Model.First().SubjectCredit</label>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label>กลุ่ม : @Model.First().SubjectGroup</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-2">
+                        <lable>รหัสอาจารย์ : @Model.First().ProfessorsId</lable>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <label>ชื่ออาจารย์ : @Model.First().ProfessorsFirstname</label>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <label>นามสกุล : @Model.First().ProfessorsLastname</label>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <label>คณะ : @Model.First().FacultyProfessors</label>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <label>สาขา : @Model.First().BranchProfessors</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-2">
+                        <lable>เบอร์โทร : @Model.First().ProfessorsTel</lable>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <label>อีเมล : @Model.First().ProfessorsEmail</label>
+                    </div>
+                </div>
+            </div>
+          
+        </div>
+
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">รหัสรักศึกษา</th>
+                        <th scope="col">ชื่อ</th>
+                        <th scope="col">คณะ</th>
+                        <th scope="col">สาขา</th>
+                        <th scope="col">เข้าเรียน</th>
+                        <th scope="col">ไม่เข้าเรียน</th>
+                        <th scope="col">หมายเหตุ</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @{ int No = 1; }
+
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>@No</td>
+                        <td>@item.StudentId</td>
+                        <td>@item.StudentFirstname</td>
+                        <td>@item.StudentLastname</td>
+                        <td>@item.FacultyName</td>
+                        <td>@item.BranchName</td>
+                        <td>@item.AttendClass</td>
+                        <td>@item.Absent</td>
+
+                    </tr>
+
+                        No++;
+                    }
+
+                </tbody>
+                </table>
+</div>
+</body>
+</html>
