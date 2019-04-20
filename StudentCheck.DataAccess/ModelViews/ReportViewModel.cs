@@ -37,8 +37,8 @@ namespace StudentCheck.DataAccess.ModelViews
         public string StudentFirstname { get; set; }
         public string StudentLastname { get; set; }
         public string StudentPrefix { get; set; }
-        public int FacultyID { get; set; }
-        public int BranchID { get; set; }
+        public string FacultyName { get; set; }
+        public string BranchName { get; set; }
         public int NumberClass { get; set; }
         public int Checkname { get; set; }
         public int Satatus { get; set; }

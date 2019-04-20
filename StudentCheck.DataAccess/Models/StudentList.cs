@@ -20,8 +20,8 @@ namespace StudentCheck.DataAccess.Models
         public string StudentAddress { get; set; }
         public string StudentFacebook { get; set; }
         public string StudentlineParent { get; set; }
-        public int? FacultyId { get; set; }
-        public int? BranchId { get; set; }
-        public int? PositionId { get; set; }
+        public int FacultyId { get; set; }
+        public int BranchId { get; set; }
+        public int PositionId { get; set; }
     }
 }
