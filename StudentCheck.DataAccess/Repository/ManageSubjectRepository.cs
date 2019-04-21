@@ -25,6 +25,11 @@ namespace StudentCheck.DataAccess.Repository
 
             context.SaveChanges();
         }
+        public static void SaveSubjectList(StudentCheckDbContext context, List<Subjects> subjects)
+        {
+            context.Subjects.AddRange(subjects);
+            context.SaveChanges();
+        }
 
         public static void UpdateSubject(StudentCheckDbContext context, CreateSubjectModel modelToUpdate)
         {

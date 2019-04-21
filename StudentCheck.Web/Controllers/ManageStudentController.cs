@@ -101,7 +101,7 @@ namespace StudentCheck.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult UploadStudentDataFile(IFormFile studentDataFile)
+        public PartialViewResult UploadStudentDataFile(IFormFile studentDataFile)
         {
             List<StudentList> studentLists = new List<StudentList>();
             using (ExcelPackage package = new ExcelPackage(studentDataFile.OpenReadStream()))
@@ -139,7 +139,12 @@ namespace StudentCheck.Web.Controllers
             studentLists.RemoveAll(w => w.StudentId == null);
             ManageStudentRepository.SaveStudentList(_context, studentLists);
 
-            return View();
+            ManageStudentViewModel model = new ManageStudentViewModel();
+            model.modelCreatStudent = new CreateStudentModel();
+
+            model.StudentList = ManageStudentRepository.GetStudentList(_context);
+
+            return PartialView("_DatatableOfStudent", model);
         }
 
     }

@@ -49,7 +49,8 @@
                 processData: false,
                 contentType: false,
                 success: function (res) {
-
+                    $("#parent-student-datatable").html(res);
+                    $("#student-datatable").DataTable();
                 }
             });
         });

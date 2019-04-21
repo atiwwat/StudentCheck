@@ -7,82 +7,103 @@
     <button type="button" class="btn btn-primary" id="btnCreateSubject">เพิ่มวิชา</button>
     <partial name="_CreateSubjectModal" model="Model" />
 </div>
+<div class="col-10">
+    <input type="file" class="form-control" id="subjectDataFile" name="subjectDataFile" />
+    <button type="button" class="btn btn-primary" id="btnUploadFile">อัพโหลด</button>
+</div>
 <div class="row" id="parent-subject-datatable" style="margin-top: 3%;">
     <partial name="_DatatableOfSubject" model="Model" />
 </div>
 
 @section Scripts {
 
-<script>
+    <script>
 
-    $(function () {
-        $("#subject-datatable").DataTable();
+        $(function () {
+            $("#subject-datatable").DataTable();
 
-        //SetPositionValueOfStudentDatatable();
-
-
-        //$(".form-inline").css("margin-bottom").replace(/[^-d.]/g, '');
+            //SetPositionValueOfStudentDatatable();
 
 
-    });
+            //$(".form-inline").css("margin-bottom").replace(/[^-d.]/g, '');
 
-    $("#btnCreateSubject").click(function () {
-        $("#create-subject-form")[0].reset();
-        $(".field-validation-error span").hide();
-        $("#modal-create-subject").modal("show");
-    });
 
-    function UpdateSubjectTable() {
-        $.ajax({
-            url: "ManageSubject/UpdateSubjectTable",
-            success: function (res) {
-                $("#parent-subject-datatable").html(res);
-                $("#subject-datatable").DataTable();
-
-                SetPositionValueOfSubjectDatatable();
-            },
-            error: function () { }
         });
-    }
 
-    var OnSaveSubjectSuccess = function (res) {
-        if (res) {
-            alert("Save Success");
-            UpdateSubjectTable();
-        }
-        else {
-            alert("Error");
-        }
-    };
-
-    var OnUpdateSubjectSuccess = function (res) {
-        if (res) {
-            alert("Update Success");
-            UpdateSubjectTable();
-        }
-        else {
-            alert("Error");
-        }
-    };
-
-    function DeleteSubject(SubjectId) {
-        $.ajax({
-            type: "POST",
-            url: "ManageSubject/DeleteSubject",
-            data: { SubjectId: SubjectId },
-            success: function (res) {
-                if (res) {
-                    alert("Delete Success");
-                    UpdateSubjectTable();
-                }
-                else {
-                    alert("Error");
-                }
-            },
-            error: function () { }
+        $("#btnCreateSubject").click(function () {
+            $("#create-subject-form")[0].reset();
+            $(".field-validation-error span").hide();
+            $("#modal-create-subject").modal("show");
         });
-    }
 
-</script>
-   
-    }
+         $("#btnUploadFile").click(function () {
+            var formData = new FormData();
+             formData.append('subjectDataFile', $('#subjectDataFile')[0].files[0]);
+            $.ajax({
+                url: '@Url.Action("UploadSubjectDataFile", "ManageSubject")',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (res) {
+                    $("#parent-subject-datatable").html(res);
+                    $("#subject-datatable").DataTable();
+
+                }
+            });
+        });
+
+        function UpdateSubjectTable() {
+            $.ajax({
+                url: "ManageSubject/UpdateSubjectTable",
+                success: function (res) {
+                    $("#parent-subject-datatable").html(res);
+                    $("#subject-datatable").DataTable();
+
+                    SetPositionValueOfSubjectDatatable();
+                },
+                error: function () { }
+            });
+        }
+
+        var OnSaveSubjectSuccess = function (res) {
+            if (res) {
+                alert("Save Success");
+                UpdateSubjectTable();
+            }
+            else {
+                alert("Error");
+            }
+        };
+
+        var OnUpdateSubjectSuccess = function (res) {
+            if (res) {
+                alert("Update Success");
+                UpdateSubjectTable();
+            }
+            else {
+                alert("Error");
+            }
+        };
+
+        function DeleteSubject(SubjectId) {
+            $.ajax({
+                type: "POST",
+                url: "ManageSubject/DeleteSubject",
+                data: { SubjectId: SubjectId },
+                success: function (res) {
+                    if (res) {
+                        alert("Delete Success");
+                        UpdateSubjectTable();
+                    }
+                    else {
+                        alert("Error");
+                    }
+                },
+                error: function () { }
+            });
+        }
+
+    </script>
+
+}
